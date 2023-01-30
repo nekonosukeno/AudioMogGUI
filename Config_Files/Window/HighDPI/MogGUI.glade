@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Generated with glade 3.38.2 -->
+<interface>
+  <requires lib="gtk+" version="3.20"/>
+  <object class="GtkFileFilter" id="Asset_Filter">
+    <patterns>
+      <pattern>*.uexp</pattern>
+      <pattern>*.bytes</pattern>
+      <pattern>*.sab</pattern>
+      <pattern>*.sabf</pattern>
+      <pattern>*.mab</pattern>
+      <pattern>*.mabf</pattern>
+    </patterns>
+  </object>
+  <object class="GtkListStore" id="ConfigStore">
+    <columns>
+      <!-- column-name Game -->
+      <column type="gchararray"/>
+    </columns>
+  </object>
+  <object class="GtkFileFilter" id="NewSound_Filter">
+    <patterns>
+      <pattern>*.wav</pattern>
+      <pattern>*.hca</pattern>
+    </patterns>
+  </object>
+  <object class="GtkListStore" id="NewSound_Store">
+    <columns>
+      <!-- column-name Sound -->
+      <column type="gchararray"/>
+      <!-- column-name Slot -->
+      <column type="gint"/>
+    </columns>
+  </object>
+  <object class="GtkListStore" id="OldSound_Store">
+    <columns>
+      <!-- column-name Sound -->
+      <column type="gchararray"/>
+      <!-- column-name Slot -->
+      <column type="gint"/>
+    </columns>
+  </object>
+  <object class="GtkWindow" id="MogWindow">
+    <property name="can-focus">False</property>
+    <property name="title" translatable="yes">AudioMog GUI</property>
+    <property name="default-height">720</property>
+    <property name="icon">../../Icons/AudioMog_Fixer.png</property>
+    <child>
+      <object class="GtkFixed" id="MogPen">
+        <property name="name">AudioMog</property>
+        <property name="visible">True</property>
+        <property name="can-focus">False</property>
+        <property name="halign">center</property>
+        <property name="valign">center</property>
+        <property name="margin-right">79</property>
+        <property name="margin-top">5</property>
+        <property name="margin-bottom">69</property>
+        <child>
+          <object class="GtkButton" id="CookButton">
+            <property name="label" translatable="yes">Cook</property>
+            <property name="width-request">137</property>
+            <property name="height-request">111</property>
+            <property name="visible">True</property>
+            <property name="can-focus">True</property>
+            <property name="receives-default">True</property>
+            <signal name="clicked" handler="CookIt" swapped="no"/>
+          </object>
+          <packing>
+            <property name="x">885</property>
+            <property name="y">1269</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="Unpack">
+            <property name="label" translatable="yes">Unpack</property>
+            <property name="width-request">140</property>
+            <property name="height-request">51</property>
+            <property name="visible">True</property>
+            <property name="can-focus">True</property>
+            <property name="receives-default">True</property>
+          </object>
+          <packing>
+            <property name="x">739</property>
+            <property name="y">403</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkFileChooserButton" id="Sound_Finder">
+            <property name="width-request">381</property>
+            <property name="height-request">51</property>
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="tooltip-text" translatable="yes">.wav or .hca</property>
+            <property name="double-buffered">False</property>
+            <property name="filter">NewSound_Filter</property>
+            <property name="show-hidden">True</property>
+            <property name="title" translatable="yes">Choose a replacement sound...</property>
+            <signal name="file-activated" handler="SoundSelected" swapped="no"/>
+          </object>
+          <packing>
+            <property name="x">716</property>
+            <property name="y">541</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="AddButton">
+            <property name="label" translatable="yes">Add</property>
+            <property name="width-request">128</property>
+            <property name="height-request">51</property>
+            <property name="visible">True</property>
+            <property name="can-focus">True</property>
+            <property name="receives-default">True</property>
+            <signal name="clicked" handler="AddNewSound" swapped="no"/>
+          </object>
+          <packing>
+            <property name="x">958</property>
+            <property name="y">705</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="OldSoundButton">
+            <property name="label" translatable="yes">Play Sound</property>
+            <property name="width-request">230</property>
+            <property name="height-request">56</property>
+            <property name="visible">True</property>
+            <property name="can-focus">True</property>
+            <property name="receives-default">True</property>
+            <signal name="clicked" handler="OldSoundVLC" swapped="no"/>
+          </object>
+          <packing>
+            <property name="x">238</property>
+            <property name="y">1011</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel">
+            <property name="width-request">524</property>
+            <property name="height-request">80</property>
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="label" translatable="yes">Select a game file to extract from:</property>
+            <property name="track-visited-links">False</property>
+          </object>
+          <packing>
+            <property name="x">118</property>
+            <property name="y">318</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel">
+            <property name="width-request">390</property>
+            <property name="height-request">80</property>
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="label" translatable="yes">Select a replacement file:</property>
+          </object>
+          <packing>
+            <property name="x">715</property>
+            <property name="y">455</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkAccelLabel">
+            <property name="width-request">312</property>
+            <property name="height-request">80</property>
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="label" translatable="yes">Sounds found in file:</property>
+          </object>
+          <packing>
+            <property name="x">119</property>
+            <property name="y">502</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="OpenSounds">
+            <property name="label" translatable="yes">Open Sounds</property>
+            <property name="width-request">229</property>
+            <property name="height-request">55</property>
+            <property name="visible">True</property>
+            <property name="can-focus">True</property>
+            <property name="receives-default">True</property>
+            <property name="tooltip-text" translatable="yes">Opens folder with extracted sounds.</property>
+            <signal name="clicked" handler="OpenProjectDir" swapped="no"/>
+          </object>
+          <packing>
+            <property name="x">236</property>
+            <property name="y">1095</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkEntry" id="SlotField">
+            <property name="width-request">117</property>
+            <property name="height-request">56</property>
+            <property name="visible">True</property>
+            <property name="can-focus">True</property>
+            <property name="width-chars">3</property>
+            <property name="placeholder-text" translatable="yes">#</property>
+            <property name="input-purpose">number</property>
+          </object>
+          <packing>
+            <property name="x">960</property>
+            <property name="y">618</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel">
+            <property name="width-request">198</property>
+            <property name="height-request">80</property>
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="label" translatable="yes">Slot number:</property>
+          </object>
+          <packing>
+            <property name="x">729</property>
+            <property name="y">604</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel">
+            <property name="width-request">267</property>
+            <property name="height-request">80</property>
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="label" translatable="yes">Your new sounds:</property>
+          </object>
+          <packing>
+            <property name="x">733</property>
+            <property name="y">762</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="NewSoundButton">
+            <property name="label" translatable="yes">Play Sound</property>
+            <property name="width-request">232</property>
+            <property name="height-request">59</property>
+            <property name="visible">True</property>
+            <property name="can-focus">True</property>
+            <property name="receives-default">True</property>
+          </object>
+          <packing>
+            <property name="x">795</property>
+            <property name="y">1162</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel">
+            <property name="width-request">459</property>
+            <property name="height-request">80</property>
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="label" translatable="yes">Select your game's config file:</property>
+          </object>
+          <packing>
+            <property name="x">85</property>
+            <property name="y">1202</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkImage" id="Logo">
+            <property name="width-request">480</property>
+            <property name="height-request">314</property>
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="pixbuf">../../Icons/AMlogo.png</property>
+          </object>
+          <packing>
+            <property name="x">366</property>
+            <property name="y">49</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkScrolledWindow" id="OldSound_Scroll">
+            <property name="width-request">387</property>
+            <property name="height-request">401</property>
+            <property name="visible">True</property>
+            <property name="can-focus">True</property>
+            <property name="shadow-type">in</property>
+            <child>
+              <object class="GtkTreeView" id="OldSound_Tree">
+                <property name="width-request">389</property>
+                <property name="height-request">400</property>
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="double-buffered">False</property>
+                <property name="hscroll-policy">natural</property>
+                <property name="vscroll-policy">natural</property>
+                <property name="model">OldSound_Store</property>
+                <property name="headers-clickable">False</property>
+                <property name="enable-search">False</property>
+                <property name="show-expanders">False</property>
+                <property name="enable-grid-lines">both</property>
+                <child internal-child="selection">
+                  <object class="GtkTreeSelection" id="OldSound_Sig">
+                    <signal name="changed" handler="OldSound_Set" swapped="no"/>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="x">110</property>
+            <property name="y">594</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkScrolledWindow" id="NewSound_Scroll">
+            <property name="width-request">369</property>
+            <property name="height-request">292</property>
+            <property name="visible">True</property>
+            <property name="can-focus">True</property>
+            <property name="shadow-type">in</property>
+            <child>
+              <object class="GtkTreeView" id="NewSound_Tree">
+                <property name="width-request">356</property>
+                <property name="height-request">283</property>
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="hscroll-policy">natural</property>
+                <property name="vscroll-policy">natural</property>
+                <property name="model">NewSound_Store</property>
+                <property name="headers-clickable">False</property>
+                <property name="enable-search">False</property>
+                <property name="show-expanders">False</property>
+                <property name="enable-grid-lines">both</property>
+                <child internal-child="selection">
+                  <object class="GtkTreeSelection" id="NewSound_Sig">
+                    <signal name="changed" handler="NewSound_Set" swapped="no"/>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="x">731</property>
+            <property name="y">857</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkFileChooserButton" id="Asset_Finder">
+            <property name="width-request">493</property>
+            <property name="height-request">51</property>
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="tooltip-text" translatable="yes">.uexp, .bytes, .sab, .sabf, .mab, .mabf</property>
+            <property name="double-buffered">False</property>
+            <property name="filter">Asset_Filter</property>
+            <property name="show-hidden">True</property>
+            <property name="title" translatable="yes">Choose an asset...</property>
+            <signal name="file-activated" handler="AssetSelected" swapped="no"/>
+          </object>
+          <packing>
+            <property name="x">118</property>
+            <property name="y">402</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkComboBox" id="ConfigBox">
+            <property name="width-request">324</property>
+            <property name="height-request">54</property>
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="model">ConfigStore</property>
+            <signal name="changed" handler="Config_Set" swapped="no"/>
+          </object>
+          <packing>
+            <property name="x">92</property>
+            <property name="y">1296</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+  </object>
+</interface>

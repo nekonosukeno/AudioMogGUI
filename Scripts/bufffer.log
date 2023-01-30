@@ -1,0 +1,24 @@
+# Below is an example output from AudioMog_DQXIS_Fixer.py - a script that corrects file size offsets for DQXI S Definitive Edition
+# You may turn this feature on by uncommenting hexlog() from the script
+# The script will only append data so if the file gets too large, you may wish to delete the contents.
+# As of now this feature only works on Linux systems. Once Windows useage is resolved I may decide to
+# add an autoclear function if the file hits a specified maximum size.
+
+# .buffer.tmp is a binary file written to and read from by 
+
+/home/nekonosuke/AMproject/Resources/Scripts/test files/Input/SWAV_fld_UN10101_jump.uexp
+@ 2022-12-11 09:44:24.5858
+Multi-Stream file detected 
+D0 67 00 00 D0 67 00 00 00 00 00 00 00 00 00 00 #Ðg..Ðg..........
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 #................
+D0 67 00 00 D0 67 00 00 25 04 00 00 00 00 00 00 #Ðg..Ðg..%.......
+73 61 62 66 02 01 10 00 04 09 99 3A D0 67 00 00 #sabf......:Ðg..
+
+
+/home/nekonosuke/AMproject/Resources/Scripts/test files/Input/SWAV_fld_UN10101_jump.uexp
+@ 2022-12-11 09:44:24.5860
+Multi-Stream file detected 
+D0 67 00 00 00 00 00 00 00 00 00 00 00 00 00 00 #Ðg..............
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 #................
+D0 67 00 00 D0 67 00 00 25 04 00 00 00 00 00 00 #Ðg..Ðg..%.......
+73 61 62 66 02 01 10 00 04 09 99 3A D0 67 00 00 #sabf......:Ðg..
