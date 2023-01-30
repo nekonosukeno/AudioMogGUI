@@ -1,13 +1,14 @@
 **Welcome to AudioMog GUI!**
 
-AudioMog GUI is a graphical interface for the AudioMog binary executeable (.exe). It is designed to be compatible with Windows, Linux, and (hopefully) MacOS. This program has the same functionality as AudioMog (because it requires you to have the .exe file) plus the following features:
+If you have not used AudioMog before, it is a program for replacing sound files in certain game assets.  
+AudioMog GUI is a visual interface for AudioMog.exe which is normally ran from the command line interface. This is designed to be compatible with Windows, Linux, and (hopefully) MacOS. This program has the same functionality as AudioMog (because it requires you to have the .exe file) plus the following features:
 
-Automatic file renaming - no more manually renaming Every_Random_Sound_File_012.wav
-Compare sounds by clicking on them and pressing the Play Sound button
-Coming Soon: Plugin feature to contain your custom configurations in a drop down menu
-High DPI mode available - currently must be done manually, see readme.txt in Icons folder
-Pop open the Project's sound files folder at will
-All processed files organized to a single Output folder
+Automatic file renaming - no more manually renaming Every_Random_Sound_File_012.wav  
+Compare sounds by clicking on them and pressing the Play Sound button  
+Coming Soon: Plugin feature to contain your custom configurations in a drop down menu  
+High DPI mode available - currently must be done manually, see readme.txt in Icons folder  
+Pop open the Project's sound files folder at will  
+All processed files organized to a single Output folder  
 
 **Beta Version Note:**  
 This program is currently in the beta stage and lacks several features that I intend to implement. These features will be discussed towards the end of this file, please refer to it before reporting any bugs.
