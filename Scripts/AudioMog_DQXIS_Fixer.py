@@ -3,44 +3,12 @@ import fileinput
 import glob
 import codecs
 import binascii
-from sys import platform
 from datetime import datetime
-
-"""
-NOTE ON HEX LOGGING: (specifically the hexlog() function)
-Hex logging is disabled by default.
-If you run Linux you may enable it by uncommenting hexlog() below (two #occurences)
-There is a bug with it on Windows that I could not resolve.
-Below is an example of the error. If you have any idea how to fix this, please let me know:
-UnicodeEncodeError: 'cp932' codec can't encode character '\xc0' in position 0: illegal multibyte sequence
-
-It seems to me the issue is that MS CP932/MS_Kanji is used interchangeably for Shift_JIS when handling UTF-8 data
-desipte the nuanced differences between how the two encode the same data. I am not an expert though and I had googled that so I'm potentially wrong.
-Regardless of whether I open buffer.log to append data with the sjis or ascii flag in Python, Windows still attempts with CP932.
-
-There appears to be no issues with decoding or handling the data raw so hexlog() should be the only function affected.
-"""
 
 #pwd = os.getcwd
 #cd = os.chdir
-def CheckOpSys():
-    global OpSys
-    if platform == "linux" or platform == "linux2":
-        OpSys = "GNU"
-    elif platform == "darwin":
-        OpSys = "MacOS"
-    elif platform == "win32" or platform == "win64":
-        OpSys = "Win10"
-    else:
-        print("OS Check: Not Compatible; Mobile Device suspected") 
-        OpSys = "Bad"
-        
-CheckOpSys()
 cwd = os.getcwd()
-if OpSys == "GNU":
-    TheseFiles = (cwd + '/**/*.uexp')
-else:
-    TheseFiles = (cwd + '\\**\\*.uexp')
+TheseFiles = (cwd + '/**/*.uexp')
 ThisPath = glob.glob(TheseFiles,
                       recursive = True)
 """
@@ -109,7 +77,7 @@ def CleanUp():
         Cleanup.write(chr(0x00))
 
 def Inject_Payload():
-    #hexlog()
+    hexlog()
     with open(".buffer.tmp", 'rb') as Fixed:
         Fixed.seek(0x00, 0x00)
         Payload = Fixed.read(0x28 - 0x00)
@@ -131,7 +99,7 @@ def Fix_UExp():
     with open(".buffer.tmp", 'rb') as Log:
         Log.seek(0x00, 0x00)
         LogData = Log.read(0x40 - 0x00)
-        #hexlog()
+        hexlog()
     #This does the actual hex editing in the buffer
     with open(".buffer.tmp", 'r+b') as Log:
         Log.seek(0x04, 0x00)

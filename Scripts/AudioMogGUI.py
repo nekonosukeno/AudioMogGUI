@@ -8,6 +8,7 @@ import gi
 import re
 import binascii
 from pathlib import Path
+from pathlib import WindowsPath
 from sys import platform
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
@@ -211,9 +212,10 @@ def WriteSendVLC_w10():
     else:
         vlc = "start VLC "
     with open("LaunchVLC.bat", 'w') as command:
+        SendVLCw10 = str(SendVLC).replace("/","\\")
         command.write("@echo off" + "\n")
         command.write("title Launch VLC" + "\n")
-        command.write(vlc + str(SendVLC) + "\n")
+        command.write(vlc + str(SendVLCw10) + "\n")
         command.write("EXIT")
 
 # This is the end goal of the previous functions, it calls VLC with the sound file to play
@@ -404,7 +406,6 @@ def get_wavs_w10():
     global TheseFiles
     TheseFiles = TheseWavs + TheseHCAs
 
-# This is a mess, I need to rewrite this. It looked cleaner before Windows happened to me
 def get_wavs():
     cd(ProjectPath)
     if OpSys == "GNU":
@@ -414,36 +415,13 @@ def get_wavs():
     global wavs_list
     wavs_list = []
     for thing in TheseFiles:
-        filesplit = re.split(delims,thing)
-        u = "_"
-        f = filesplit
-        #how_much_space_this_saves_from_a_single_line()
-        if f[-6] == "SWAV":
-            filename = f[-6]+u+f[-5]+u+f[-4]+u+f[-3]+u+f[-2]+"."+f[-1]
-        elif f[-7] == "SWAV":
-            filename = f[-7]+u+f[-6]+u+f[-5]+u+f[-4]+u+f[-3]+u+f[-2]+"."+f[-1]
-        elif f[-5] == "SWAV":
-            filename = f[-5]+u+f[-4]+u+f[-3]+u+f[-2]+"."+f[-1]
-        elif f[-4] == "SWAV":
-            filename = f[-4]+u+f[-3]+u+f[-2]+"."+f[-1]
-            # uh, I promise I'll figure out a better way to find "SWAV_"
-        else:
-            otherfilesplit = re.split(other_delims,thing)
-            otherfilename = otherfilesplit[-1]
-        slotNO = int(f[-2])
-        if "SWAV" in filename:
-            wavs_list.append((filename, slotNO))
-        else:
-            wavs_list.append((otherfilename, slotNO))
+        SlotSplit = re.split(delims,thing)
+        NameSplit = re.split(other_delims,thing)
+        FileName = NameSplit[-1]
+        SlotNO = int(SlotSplit[-2])
+        wavs_list.append((FileName, SlotNO))
     wavs_list.sort()
     cd(ScriptDir)
-
-def how_much_space_this_saves_from_a_single_line():
-    nums = "f"
-    num = "f"
-    for f in range(0, 79):
-        nums = nums + num
-    print(nums)
 
 # Preps the list used for the NewSound Tree
 # We clear the New Sounds TreeView everytime Add button is clicked,
@@ -526,12 +504,12 @@ elif OpSys == "Win10":
     cd("..\\..\\Binaries\\AudioMog")
     AMdir = pwd()
     cd(ScriptDir)
-    DQXIS_Fixer = ScriptDir + "\\AudioMog_DQXIS_Fixer.py"
-    CurrentConfig = AMdir + "\\TerminalSettings.json"
-    DefaultSettings = ConfigDir + "\\Default\\TerminalSettings.json"
-    DQXIS_MS = ConfigDir + "\\DQXIS\\MS\\TerminalSettings.json"
-    DQXIS_SB = ConfigDir + "\\DQXIS\\SB\\TerminalSettings.json"
-    DQXIS_SS = ConfigDir + "\\DQXIS\\SS\\TerminalSettings.json"
+    DQXIS_Fixer = str(WindowsPath(ScriptDir) / "AudioMog_DQXIS_Fixer.py")
+    CurrentConfig = str(WindowsPath(AMdir) / "TerminalSettings.json")
+    DefaultSettings = str(WindowsPath(ConfigDir) / "Default" / "TerminalSettings.json")
+    DQXIS_MS = str(WindowsPath(ConfigDir) / "DQXIS" / "MS" / "TerminalSettings.json")
+    DQXIS_SB = str(WindowsPath(ConfigDir) / "DQXIS" / "SB" / "TerminalSettings.json")
+    DQXIS_SS = str(WindowsPath(ConfigDir) / "DQXIS" / "SS" / "TerminalSettings.json")
 # Loads Default config into memory
 with open(DefaultSettings, "r") as StdConfig:
     DefaultConfig = StdConfig.read()

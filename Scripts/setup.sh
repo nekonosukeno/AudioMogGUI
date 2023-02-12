@@ -79,7 +79,7 @@ function WriteStuff() {
     FileContent >> AudioMogGUI.desktop
 }
 
-# Checks if the shortcut exists in the next directory up and if missing initiates creating it
+# Checks if the shortcut exists and if missing initiates creating it
 function MakeShortcut() {
     if [[ ! -f AudioMogGUI.desktop ]]; then
         echo "Creating shortcut now...";

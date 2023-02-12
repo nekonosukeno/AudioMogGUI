@@ -1,6 +1,6 @@
 {
   "TerminalSettings": {
-    "ImmediatelyQuitOnceAllTasksAreDone": true,
+    "ImmediatelyQuitOnceAllTasksAreDone": false,
     "LogLevel": 3
   },
   "ApplicationSettings": {
@@ -13,7 +13,7 @@
         "Main": 2,
         "Sub": 0
       },
-      "OverrideUAssetFileSizeOffsetFromEndOfFile": 96
+      "OverrideUAssetFileSizeOffsetFromEndOfFile": null
     },
     "AudioExtractor": {
       "ExtractAsRaw": false,
